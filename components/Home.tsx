@@ -4,7 +4,7 @@ function home() {
     return (
        <View>
         <Text>
-           this is home page 
+           This is home page 
         </Text>
 
        </View>
