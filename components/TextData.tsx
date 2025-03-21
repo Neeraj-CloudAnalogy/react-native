@@ -2,11 +2,11 @@ import React from 'react';
 import { View, Text, StyleSheet } from 'react-native';
 function TextData() {
     const name ="neeraj sharma"
-let age =21;
+let age ="App Developer";
     return (
         <View>
 <Text style={styles.Text}>Hello {name}</Text>
-              <Text style={[styles.Text]}>Age: {age} </Text>
+            <Text style={[styles.Text]}>({age}) </Text>
               <View style={styles.mainbox}>
           <View style={styles.box1}>
             <Text>

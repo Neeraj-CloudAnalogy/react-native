@@ -11,18 +11,27 @@ function Sectionlistcomponent() {
        <>
        <SectionList
        sections={list}
+       keyExtractor={(item , index) => item +index}
        renderItem={({item})=>{
-         return (<Text style={{ textAlign:"center",color:"brown",margin:10,borderColor:"lightgreen",borderWidth:2}}>
+         return (
+          <View>
+          <Text style={{ textAlign:"center",color:"brown",margin:10,borderColor:"lightgreen",borderWidth:2}}>
             {item}
-         </Text>)
+          </Text>
+          </View>
+
+         )
        }}
-       renderSectionHeader={({section:{name}})=>{return <View style={{ flex:1,flexDirection:'row',justifyContent:'center',alignItems:'center'}}>
-<Text style={{ fontWeight: 'bold', fontSize: 22 ,borderWidth:5,borderRadius:10,padding:10, backgroundColor:"lightyellow"}}>{name}</Text>;  
+       renderSectionHeader={({section})=>{
+        return (
+        <View style={{ flex:1,flexDirection:'row',justifyContent:'center',alignItems:'center'}}>
+<Text style={{ fontWeight: 'bold', fontSize: 22 ,borderWidth:5,borderRadius:10,padding:10, backgroundColor:"lightyellow"}}>{section.name}
+  </Text>;  
 
        </View>
-        }}
+     ) }}
        
-       keyExtractor={(item , index) => index.toString()}
+       
        
        
        

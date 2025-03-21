@@ -8,9 +8,9 @@ function ImageComponent() {
                   style={{width: 100, height: 100, borderRadius:100,opacity:0.5}}
                   onLoad={(()=>console.log('image loaded'))}
                   />
-            {/* <Image source={require('./assets/photo1.jpeg')}
+            <Image source={require('../assets/photo1.jpeg')}
                   style={{width: 200, height: 300}}
-                  resizeMode='contain'/> */}
+                  resizeMode='contain'/>
                   </View>
     );
 }
