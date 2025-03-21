@@ -10,7 +10,10 @@ import ImageComponent from './components/ImageComponent';
 import SwitchComponent from './components/SwitchComponet';
 import TextInputComponent from './components/TextInputComponent';
 import Sectionlistcomponent from './components/Sectionlistcomponent';
-
+import Refreshcontrolcomponent from './components/Refreshcontrolcomponent'
+import FlatListcomponent from './components/flatListcomponent';
+import NestedFlatList from './components/NestedFlatlistandtogle';
+import FetchDataFlatlist from './components/FetchDataFlatlist';
 import {
   
   StatusBar,
@@ -29,6 +32,8 @@ import {
   ActivityIndicator,
  
 } from 'react-native';
+
+
 
  
 
@@ -51,6 +56,7 @@ function App(): React.JSX.Element {
 
 const Userdata=()=>{
   return(
+    
 <View>
   <Text style={styles.Text}>hlo world</Text> 
 </View>
@@ -70,7 +76,9 @@ const Userdata=()=>{
 
   return (
       <>
-      <ScrollView style={[styles.container,{backgroundColor:colorx}]} >
+     <Refreshcontrolcomponent/>
+      <ScrollView style={[styles.container,{backgroundColor:colorx}]}
+       showsVerticalScrollIndicator ={false}>
        <StatusBar
        animated={true}
         backgroundColor="lightblue"
@@ -80,11 +88,13 @@ const Userdata=()=>{
 
 
       <ScrollView1/>
-
-       
+      
        <TextData/>
+       <FetchDataFlatlist/> 
         <Buttonandpressable/>
         <ImageComponent/>
+        <FlatListcomponent/>
+        <NestedFlatList/>
 
         <Sections title="custom component">
           <View>
@@ -124,6 +134,7 @@ const Userdata=()=>{
         </View> */}
          
       </ScrollView>
+      
       </>
     
   );
