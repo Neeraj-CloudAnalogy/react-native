@@ -12,6 +12,10 @@ function FetchDataFlatlist() {
 
   return (
     <View style={styles.container}>
+      <Text style={styles.head}>
+        Clothes/Electronics items
+
+      </Text>
       <FlatList
         data={data}
         keyExtractor={(item) => item.id.toString()}
@@ -42,6 +46,12 @@ const styles = StyleSheet.create({
     flex: 1,
     padding: 10,
     backgroundColor: '#f5f5f5',
+  },
+  head:{
+  fontSize:20,
+  fontWeight:"bold",
+  padding:10,
+  marginLeft:5
   },
   itemContainer: {
     flexDirection: 'row',

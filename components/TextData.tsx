@@ -45,9 +45,9 @@ const styles = StyleSheet.create({
        flexDirection:'row',
        justifyContent:'center',
        alignItems:'center',
-        
-       height:400,
-       width:400,
+        marginLeft:30,
+       height:300,
+       width:300,
        borderRadius:3000,
        backgroundColor:'lightblue',
    
