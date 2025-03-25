@@ -10,7 +10,7 @@ function FlatListComponent() {
   ];
 
   // Function to handle item press
-  const handleItemPress = (name) => {
+  const handleItemPress = (name:string) => {
     Alert.alert(`Item pressed: ${name}`);
   };
 
