@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Text, View, StyleSheet, FlatList, Image } from 'react-native';
-
+import LoginComponent from './LoginComponent';
 function FetchDataFlatlist() {
   const [data, setData] = useState([]);
 
@@ -16,6 +16,7 @@ function FetchDataFlatlist() {
         Clothes/Electronics items
 
       </Text>
+      <LoginComponent/>
       <FlatList
         data={data}
         keyExtractor={(item) => item.id.toString()}

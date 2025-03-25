@@ -6,34 +6,67 @@ import Profile from './Profile';
 import Contact from './Contact';
 import { Text, View, Button } from 'react-native';
 import FetchDataFlatlist from './FetchDataFlatlist';
+import Stacknavigator from './Stacknavigator';
+import BottomTabNavigator from './BottomTabNavigator';
+import LoginPage from './LoginPage';
 
-function Drawer() {
+
+function AppDrawer() {
     const Drawer = createDrawerNavigator();
     return (
-      <NavigationContainer>
-             <Drawer.Navigator>
+            <NavigationContainer>
+             <Drawer.Navigator  >
              <Drawer.Screen
-          name="Home"
-          component={Home}
+          name="bottom"
+          component={BottomTabNavigator}
           options={{
-            headerTitle: 'HOME',
+            
             headerTitleAlign: 'left',
             headerTintColor: 'green',
             headerStyle: { backgroundColor: '#333333' },
             headerTitleStyle: { fontSize: 30, fontWeight: 'bold' },
+            // drawerIcon: ({ focused, size }) => (
+            //   <Entypo name="home" size={size} color={focused ? 'green' : 'gray'} />
+            // ),
           }}
+        />
+
+
+
+            
+
+
+
+            
+               <Drawer.Screen
+          name="Login Page"
+          component={LoginPage}
+          // options={{
+          //   headerTitleAlign: 'left',
+          //   headerTintColor: 'green',
+          //   headerStyle: { backgroundColor: '#333333' },
+          //   headerTitleStyle: { fontSize: 30, fontWeight: 'bold' },
+          //   // drawerIcon: ({ focused, size }) => (
+          //   //   <Entypo name="home" size={size} color={focused ? 'green' : 'gray'} />
+          //   // ),
+          // }}
         />
         <Drawer.Screen
           name="Shoping"
           component={FetchDataFlatlist}
           options={{
-            headerTitle: 'Shoping',
+            headerTitle: 'Shopping',
             headerTitleAlign: 'left',
             headerTintColor: 'green',
             headerStyle: { backgroundColor: 'lightblue' },
             headerTitleStyle: { fontSize: 30, fontWeight: 'bold' },
           }}
         />
+              
+             
+
+         
+        
         <Drawer.Screen
           name="Profile"
           component={Profile}
@@ -58,9 +91,7 @@ function Drawer() {
         />
       </Drawer.Navigator>  
       </NavigationContainer>
-
-        
     );
 }
 
-export default Drawer;
+export default AppDrawer;
