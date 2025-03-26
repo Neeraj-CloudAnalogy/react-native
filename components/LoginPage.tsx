@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
-import { View, Text, TextInput, TouchableOpacity, StyleSheet, Alert } from 'react-native';
+import { View, Text, TextInput, TouchableOpacity, StyleSheet,BackHandler, Alert } from 'react-native';
 
-const LoginPage = () => {
+const LoginPage = ({navigation}:{navigation:any}) => {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
 
@@ -13,6 +13,28 @@ const LoginPage = () => {
       Alert.alert('Success', `Welcome, ${username}`);
     }
   };
+
+
+  const BackAction =()=>{
+          Alert.alert("Hold on!" ,"Are you really want to go back ",[
+            {
+              text: 'No',
+              onPress:()=>null,
+
+            },
+            {
+              text: 'Yes',
+              onPress:()=>navigation.goBack(),
+
+            }
+          ]);  
+           return true;
+  
+      }
+  
+      const backHandler =BackHandler.addEventListener(
+          "hardwareBackPress",BackAction
+      )
 
   return (
     <View style={styles.container}>

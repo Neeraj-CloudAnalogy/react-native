@@ -23,6 +23,7 @@ function BottomTabNavigator() {
         name="Home"
         component={Home}
         options={{
+          headerShown:false,
           tabBarLabel: 'Home',
           // tabBarIcon: ({ focused, size }) => (
           //   // <Ionicons
@@ -38,6 +39,7 @@ function BottomTabNavigator() {
         component={Profile}
         options={{
           tabBarLabel: 'Profile',
+          headerShown:false,
           // tabBarIcon: ({ focused, size }) => (
           //   <Ionicons
           //     name={focused ? 'person' : 'person-outline'}
@@ -52,6 +54,7 @@ function BottomTabNavigator() {
         component={Contact}
         options={{
           tabBarLabel: 'Contact',
+          headerShown:false,
           // tabBarIcon: ({ focused, size }) => (
           //   <Ionicons
           //     name={focused ? 'call' : 'call-outline'}
