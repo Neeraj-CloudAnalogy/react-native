@@ -12,6 +12,7 @@ import LoginPage from './LoginPage';
 import OpenAndCloseDrawer from './OpenAndCloseDrawer';
 import ModalComponent from './ModalComponent';
 import SignupComponent from './SignupComponent';
+import CrudComponent from './CrudComponent';
 
 
 function AppDrawer() {
@@ -60,6 +61,22 @@ function AppDrawer() {
           //   // ),
           }}
         />
+<Drawer.Screen
+          name="Crud Page"
+          component={CrudComponent}
+          options={{
+            headerTitleAlign: 'left',
+            headerTintColor: 'green',
+            headerStyle: { backgroundColor: '#333333' },
+          //   headerTitleStyle: { fontSize: 30, fontWeight: 'bold' },
+          //   // drawerIcon: ({ focused, size }) => (
+          //   //   <Entypo name="home" size={size} color={focused ? 'green' : 'gray'} />
+          //   // ),
+          }}
+        />
+
+
+
 
 <Drawer.Screen
           name="Modal Page"

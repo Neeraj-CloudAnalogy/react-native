@@ -1,25 +1,33 @@
 import React, { useState } from 'react';
-import { View, Text, TextInput, TouchableOpacity, Alert, StyleSheet } from 'react-native';
+import {
+  View,
+  Text,
+  TextInput,
+  TouchableOpacity,
+  Alert,
+  StyleSheet,
+} from 'react-native';
 
 const SignupComponent = ({ navigation }: { navigation: any }) => {
   const [name, setName] = useState('');
   const [phone, setPhone] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  const [password1, setPassword1] = useState('');
+  const [confirmPassword, setConfirmPassword] = useState('');
 
-  const formdata = () => {
-    if (!name || !email || !phone || !password || !password1) {
+  const handleSubmit = () => {
+    if (!name || !email || !phone || !password || !confirmPassword) {
       Alert.alert('Error', 'Please fill in all fields');
       return;
     }
 
-    if (password !== password1) {
+    if (password !== confirmPassword) {
       Alert.alert('Error', 'Passwords do not match');
       return;
     }
 
-    if (!/^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/.test(email)) {
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!emailRegex.test(email)) {
       Alert.alert('Error', 'Please enter a valid email');
       return;
     }
@@ -30,13 +38,25 @@ const SignupComponent = ({ navigation }: { navigation: any }) => {
     }
 
     Alert.alert('Success', 'Signup Successful');
-    navigation.navigate('Login'); };
+
+    setName('');
+    setPhone('');
+    setEmail('');
+    setPassword('');
+    setConfirmPassword('');
+    navigation.navigate('Login');
+  };
 
   return (
     <View style={styles.container}>
       <Text style={styles.title}>Sign Up</Text>
 
-      <TextInput style={styles.input} placeholder="Enter your Name" value={name} onChangeText={setName} />
+      <TextInput
+        style={styles.input}
+        placeholder="Enter your Name"
+        value={name}
+        onChangeText={setName}
+      />
       <TextInput
         style={styles.input}
         placeholder="Enter your Phone No"
@@ -62,12 +82,12 @@ const SignupComponent = ({ navigation }: { navigation: any }) => {
       <TextInput
         style={styles.input}
         placeholder="Re-enter Password"
-        value={password1}
-        onChangeText={setPassword1}
+        value={confirmPassword}
+        onChangeText={setConfirmPassword}
         secureTextEntry
       />
 
-      <TouchableOpacity style={styles.button} onPress={formdata}>
+      <TouchableOpacity style={styles.button} onPress={handleSubmit}>
         <Text style={styles.buttonText}>Submit</Text>
       </TouchableOpacity>
     </View>
@@ -79,38 +99,40 @@ export default SignupComponent;
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
     padding: 20,
-    backgroundColor: '#f4f4f4',
+    marginTop: 40,
+    backgroundColor: '#F9FAFB',
   },
   title: {
-    fontSize: 26,
+    fontSize: 28,
     fontWeight: 'bold',
-    marginBottom: 20,
+    marginBottom: 25,
     color: '#333',
+    textAlign: 'center',
   },
   input: {
     width: '100%',
     height: 50,
-    borderColor: '#ccc',
+    borderColor: '#ddd',
     borderWidth: 1,
-    borderRadius: 8,
+    borderRadius: 10,
     marginBottom: 12,
-    paddingLeft: 10,
+    paddingHorizontal: 12,
     fontSize: 16,
     backgroundColor: '#fff',
   },
   button: {
     width: '100%',
     height: 50,
-    backgroundColor: '#007BFF',
+    backgroundColor: '#5A67D8',
     justifyContent: 'center',
     alignItems: 'center',
-    borderRadius: 8,
+    borderRadius: 10,
+    marginTop: 20,
+    elevation: 2,
   },
   buttonText: {
-    color: 'white',
+    color: '#fff',
     fontSize: 18,
     fontWeight: 'bold',
   },
