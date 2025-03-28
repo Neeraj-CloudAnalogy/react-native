@@ -7,6 +7,7 @@ const CrudComponent = ({ navigation }: { navigation: any }) => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [password1, setPassword1] = useState('');
+  const [editIndex, setEditIndex] = useState(null);
 
   const arr = [
     {
@@ -38,16 +39,16 @@ const CrudComponent = ({ navigation }: { navigation: any }) => {
   }
 
   const editfun=(index:number)=>{
-    const editData =data.find((val,i)=>i == index);
-    setName(editData?.name)
-    setPhone(editData?.phone)
-    setEmail(editData?.email)
-    const deletedData1 = data.filter((val, i) => i !== index);
-    setData(deletedData1);
-
-
-    
-
+    // const editData =data.find((val,i)=>i == index);
+    // setName(editData?.name)
+    // setPhone(editData?.phone)
+    // setEmail(editData?.email)
+    const item =data[index]
+    setName(item.name)
+    setPhone(item.phone)
+    setEmail(item.email)
+    setEditIndex(index)
+  
     
   }
 
@@ -74,7 +75,15 @@ const CrudComponent = ({ navigation }: { navigation: any }) => {
       phone: phone,
       email: email
     };
-    setData([...arr,newUser]);
+    if (editIndex !== null) {
+      const updatedData = [...data];
+      updatedData[editIndex] = newUser;
+      setData(updatedData);
+      setEditIndex(null);
+    } else {
+      setData([...data, newUser]);
+    }
+
 
     Alert.alert('Success', 'Signup Successful');
     setName('');
