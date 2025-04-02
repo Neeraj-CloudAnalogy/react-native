@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Button, FlatList, Text, View, StyleSheet } from 'react-native';
+import { Button, FlatList, Text, View, StyleSheet, ToastAndroid } from 'react-native';
 import axios from 'axios';
 import PropsDrillingAndContextApi from './PropsDrillingAndContextApi';
 
@@ -7,112 +7,99 @@ function ApiCalling() {
     const apiurl = 'http://10.0.2.2:3000/posts';
     const [arr, setarr] = useState([]);
 
-    const getreqapi = async () => {
-        try {
-            const response = await fetch(apiurl, {
-                method: 'GET',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-            });
-            const data = await response.json();
-            setarr(data);
-        } catch (error) {
-            console.log('error is their', error);
-        }
-    };
-
-    const putreqapi = async () => {
-        try {
-            const response = await fetch('http://10.0.2.2:3000/posts/1', {
-                method: 'PUT',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify({
-                    name: 'data is updated',
-                }),
-            });
-            const data = await response.json();
-            setarr(data);
-        } catch (error) {
-            console.log('error is their', error);
-        }
-    };
-
-    const putreqbyaxios = async () => {
-        const response = await axios.put(`http://10.0.2.2:3000/posts/${'4'}`, {
-            name: 'data is up to date',
+    const getreqapi = () => {
+        return fetch(apiurl, {
+            method: 'GET',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+        })
+        .then(response => {
+            if (!response.ok) {
+                return Promise.reject('API request failed with status ' + response.status);
+            }
+            return response.json();
+        })
+        .then(data => setarr(data))
+        .catch(error => {
+            console.error('Error fetching data:', error);
+            return Promise.reject(error);
         });
-        setarr(response.data);
     };
 
-    const patchreqbyaxios = async () => {
-        const response = await axios.patch(`http://10.0.2.2:3000/posts/${'2'}`, {
-            name: 'data is up to date',
-            surname: 'patch done',
-        });
-        setarr(response.data);
+    const putreqapi = () => {
+        return fetch('http://10.0.2.2:3000/posts/1', {
+            method: 'PUT',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({
+                name: 'data is updated',
+            }),
+        })
+        .then(response => {
+            if (!response.ok) {
+                return Promise.reject('API request failed with status ' + response.status);
+            }
+            return response.json();
+        })
+        .then(data => setarr(data))
+        .catch(error => Promise.reject(error));
     };
 
-    const deletereqbyaxios = async () => {
-        const response = await axios.delete(`http://10.0.2.2:3000/posts/${'4'}`);
-        setarr(response.data);
+    const putreqbyaxios = () => {
+        return axios.put(`${apiurl}/4`, { name: 'data is up to date' })
+        .then(response => setarr(response.data))
+        .catch(error => Promise.reject(error));
     };
 
-    const getreqapifromaxios = async () => {
-        try {
-            const response = await axios.get(apiurl);
-            setarr(response.data);
-        } catch (error) {
-            console.log('error is their', error);
-        }
+    const patchreqbyaxios = () => {
+        return axios.patch(`${apiurl}/2`, { name: 'data is up to date', surname: 'patch done' })
+        .then(response => setarr(response.data))
+        .catch(error => Promise.reject(error));
     };
 
-    const postreq = async () => {
-        try {
-            const data = {
-                name: 'raghav',
-                surname: 'diman',
-            };
-            const response = await fetch(apiurl, {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify(data),
-            });
-            const responseData = await response.json();
-            setarr(responseData);
-        } catch (error) {
-            console.log('error is their', error);
-        }
+    const deletereqbyaxios = () => {
+        return axios.delete(`${apiurl}/4`)
+        .then(response => setarr(response.data))
+        .catch(error => Promise.reject(error));
     };
 
-    const postreqbyaxios = async () => {
-        try {
-            const data = {
-                name: 'manav',
-                surname: 'kumar',
-            };
-            const response = await axios.post(apiurl, data);
-
-            setarr(response.data);
-        } catch (error) {
-            console.log('error is their', error);
-        }
+    const getreqapifromaxios = () => {
+        return axios.get(apiurl)
+        .then(response => setarr(response.data))
+        .catch(error => Promise.reject(error));
     };
 
-    const renderItem = ({ item }: { item: any }) => (
+    const postreq = () => {
+        return fetch(apiurl, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({ name: 'raghav', surname: 'diman' }),
+        })
+        .then(response => response.json())
+        .then(data => setarr(data))
+        .catch(error => Promise.reject(error));
+    };
+
+    const postreqbyaxios = () => {
+        return axios.post(apiurl, { name: 'manav', surname: 'kumar' })
+        .then(response => setarr(response.data))
+        .catch(error => Promise.reject(error));
+    };
+
+    const renderItem = ({ item}:{item:any}) => (
         <View style={styles.listItem}>
-            <Text style={styles.listText}>Name: {item.name}</Text>
-            <Text style={styles.listText}>Last Name: {item.surname}</Text>
+            <Text style={styles.listText}>Name: {item?.name}</Text>
+            <Text style={styles.listText}>Last Name: {item?.surname}</Text>
         </View>
     );
 
     return (
         <View style={styles.container}>
-            <PropsDrillingAndContextApi/>
+            <PropsDrillingAndContextApi />
             <FlatList
                 data={arr}
                 keyExtractor={item => item.id.toString()}
@@ -120,14 +107,46 @@ function ApiCalling() {
                 style={styles.flatList}
             />
             <View style={styles.buttonContainer}>
-                <Button title="Call API from Axios" onPress={getreqapifromaxios} />
-                <Button title="Call API from Fetch" onPress={getreqapi} />
-                <Button title="Push Data to Server (Fetch)" onPress={postreq} />
-                <Button title="Push Data to Server (Axios)" onPress={postreqbyaxios} />
-                <Button title="Update Data (Fetch)" onPress={putreqapi} />
-                <Button title="Update Data (Axios)" onPress={putreqbyaxios} />
-                <Button title="Delete Data (Axios)" onPress={deletereqbyaxios} />
-                <Button title="Patch Data (Axios)" onPress={patchreqbyaxios} />
+                <Button title="Call API from Axios" onPress={() => {
+                    getreqapifromaxios()
+                    .then(() => ToastAndroid.show('Success', ToastAndroid.TOP))
+                    .catch(() => ToastAndroid.show('Error', ToastAndroid.TOP));
+                }} />
+                <Button title="Call API from Fetch" onPress={() => {
+                    getreqapi()
+                    .then(() => ToastAndroid.show('Success', ToastAndroid.TOP))
+                    .catch(() => ToastAndroid.show('Error', ToastAndroid.TOP));
+                }} />
+                <Button title="Push Data to Server (Fetch)" onPress={() => {
+                    postreq()
+                    .then(() => ToastAndroid.show('Success', ToastAndroid.TOP))
+                    .catch(() => ToastAndroid.show('Error', ToastAndroid.TOP));
+                }} />
+                <Button title="Push Data to Server (Axios)" onPress={() => {
+                    postreqbyaxios()
+                    .then(() => ToastAndroid.show('Success', ToastAndroid.TOP))
+                    .catch(() => ToastAndroid.show('Error', ToastAndroid.TOP));
+                }} />
+                <Button title="Update Data (Fetch)" onPress={() => {
+                    putreqapi()
+                    .then(() => ToastAndroid.show('Success', ToastAndroid.TOP))
+                    .catch(() => ToastAndroid.show('Error', ToastAndroid.TOP));
+                }} />
+                <Button title="Update Data (Axios)" onPress={() => {
+                    putreqbyaxios()
+                    .then(() => ToastAndroid.show('Success', ToastAndroid.TOP))
+                    .catch(() => ToastAndroid.show('Error', ToastAndroid.TOP));
+                }} />
+                <Button title="Delete Data (Axios)" onPress={() => {
+                    deletereqbyaxios()
+                    .then(() => ToastAndroid.show('Success', ToastAndroid.TOP))
+                    .catch(() => ToastAndroid.show('Error', ToastAndroid.TOP));
+                }} />
+                <Button title="Patch Data (Axios)" onPress={() => {
+                    patchreqbyaxios()
+                    .then(() => ToastAndroid.show('Success', ToastAndroid.TOP))
+                    .catch(() => ToastAndroid.show('Error', ToastAndroid.TOP));
+                }} />
             </View>
         </View>
     );
