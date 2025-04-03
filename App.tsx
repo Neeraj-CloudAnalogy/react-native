@@ -16,11 +16,12 @@ import axios, {Axios} from 'axios';
 import ApiCalling from './components/ApiCalling';
 import PropsDrillingAndContextApi from './components/PropsDrillingAndContextApi';
 import PhoneList from './components/PhoneList';
+import AppNavigator from './components/AppNavigator';
 
 function App(): React.JSX.Element {
   return (
     <>
-      <PhoneList />
+      <AppNavigator />
     </>
   );
 }

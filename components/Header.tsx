@@ -1,11 +1,19 @@
-import React from 'react';
-import { View, Text, StyleSheet } from 'react-native';
+import React, { useEffect, useState } from 'react';
+import { View, Text, StyleSheet ,ToastAndroid} from 'react-native';
+import { useSelector, UseSelector } from 'react-redux';
 
 function Header() {
+    const cartData =useSelector((state:any)=>state.reducer)
+    const [cartcount,setcartcount]=useState(0);
+    useEffect(()=>{
+        setcartcount(cartData.length)
+
+    },[cartData])
+    
     return (
        <View style={styles.container}>
         <Text style={styles.text}>
-            ITEMS IN CART: 0
+            ITEMS IN CART: {cartcount}
         </Text>
        </View>
     );
