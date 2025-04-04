@@ -15,6 +15,7 @@ function AppNavigator() {
         <Stack.Screen name="PhoneList" component={PhoneList} options={{ title: "Available Phones" }} />
         <Stack.Screen name="Cart" component={PhoneItem} options={{ title: "Your Cart" }} />
         <Stack.Screen name="ApiCalling" component={ApiCalling} options={{ title: "API Calling" }} />
+        
       </Stack.Navigator>
     </NavigationContainer>
   );

@@ -2,6 +2,7 @@ import React from 'react';
 import { Button, ScrollView, Text, View } from 'react-native';
 import PhoneItem from './PhoneItem';
 import Header from './Header';
+import SagaUserList from './SagaUserList';
 
 function PhoneList({ navigation }:{navigation :any}) {  
   const item = [
@@ -17,8 +18,10 @@ function PhoneList({ navigation }:{navigation :any}) {
   return (
     <>
       <Button title="Go to API Calling" onPress={() => navigation.navigate("ApiCalling")} />
-      <Header />
       <ScrollView>
+        <SagaUserList/>
+      <Header />
+     
         {item.map((x, index) => <PhoneItem key={index} item={x} />)}
       </ScrollView>
     </>
